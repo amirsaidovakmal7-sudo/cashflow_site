@@ -1,0 +1,60 @@
+# ===== СЕКРЕТЫ И ПЕРСОНАЛЬНЫЕ НАСТРОЙКИ =====
+.env
+credentials.json
+
+# ===== БАЗА ДАННЫХ =====
+db.sqlite3
+db.sqlite3-journal
+
+# ===== МЕДИА (загружено пользователями через админку) =====
+media/
+
+# ===== СТАТИКА (собирается командой collectstatic) =====
+staticfiles/
+
+# ===== PYTHON =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ===== ВИРТУАЛЬНОЕ ОКРУЖЕНИЕ =====
+venv/
+env/
+ENV/
+.venv/
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== ОС =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== ЛОГИ =====
+*.log
+logs/
+
+# ===== DJANGO =====
+local_settings.py
