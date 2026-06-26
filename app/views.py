@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import *
 import telebot
-from project.config import TOKEN
 
 
-bot = telebot.TeleBot(TOKEN)
+
+bot = telebot.TeleBot('8574231640:AAH_MAVtI0YuceTkZVZHt7y1CIO5Je5uxvg')
 group_id = -1004461894992
 
 def home_page(request):

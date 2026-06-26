@@ -6,7 +6,7 @@ from google.oauth2.service_account import Credentials
 import django
 import time
 import threading
-from project.config import GOOGLE_KEY
+import datetime
 
 # Поднимаемся вверх: commands -> management -> app -> корень проекта
 BASE_DIR = os.path.dirname(
@@ -21,26 +21,21 @@ sys.path.insert(0, BASE_DIR)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 django.setup()
+
+# Импорты после django.setup() — иначе Django не найдёт модули
+from config import GOOGLE_KEY
 from app.models import Event
-
-
-
-
 
 scopes = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive",
 ]
 
-
-
-
 credentials = Credentials.from_service_account_file(os.path.join(BASE_DIR, 'credentials.json'), scopes=scopes)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 
 gc = gspread.authorize(credentials)
-
 
 event = Event.objects.all()
 
@@ -63,7 +58,7 @@ def create_event():
               f'Дата: {date} \n'
               f'Количество мест: {orders} \n'
               f'Название места: {place_name} \n'
-                  f'Ссылка: {place_link} \n')
+              f'Ссылка: {place_link} \n')
 
         ev_name = Event.objects.filter(event_name=name)
         ev_date = Event.objects.filter(event_date=date)
@@ -71,13 +66,12 @@ def create_event():
             print('ТАКОЙ ОБЬЕКТ ЕСТЬ')
         else:
             new_event = Event.objects.create(event_name=name, event_date=date, event_place_name=place_name,
-                                         event_location=place_link, event_age_min=age_min,
-                                         event_age_max=age_max,
-                                         event_amount=orders)
+                                             event_location=place_link, event_age_min=age_min,
+                                             event_age_max=age_max,
+                                             event_amount=orders)
             new_event.save()
 
     return True
-
 
 
 def check_orders():
@@ -93,13 +87,14 @@ def check_orders():
                 e.save()
     print('ОБЬЕКТ ПОМЕНЯЛСЯ')
 
+
 def delete_if_orders_full():
     for e in event:
         if e.event_amount == '9/9':
             e.delete()
-            e.save()
             print('ОБЬЕКТ УДАЛИЛСЯ')
     return True
+
 
 def delete_object_if_not_in_table():
     sheet = gc.open_by_key(GOOGLE_KEY).worksheet('Слоты')
@@ -110,10 +105,7 @@ def delete_object_if_not_in_table():
         for e in event:
             if e.event_name != name and e.event_date != date:
                 e.delete()
-                e.save()
-    print('ОБЬЕКТ УДАЛИЛСЯ')
-
-
+    print('УДАЛИЛСЯ')
 
 
 def do_all_func():
@@ -121,14 +113,13 @@ def do_all_func():
         create_event()
         check_orders()
         delete_if_orders_full()
+        delete_object_if_not_in_table()
         time.sleep(300)
-
 
 
 thread = threading.Thread(target=do_all_func)
 thread.daemon = True
 thread.start()
-
 
 # Основной поток продолжает свою работу
 print("Основной поток продолжает выполняться...")

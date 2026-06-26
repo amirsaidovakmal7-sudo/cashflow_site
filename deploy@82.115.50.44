@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "precise-hangar-499608-k2",
+  "private_key_id": "8db2476f5006e78c253a7469e3f315a060987f4a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDF9bm8TlN1O99a\nH0wdGypt/02LNwpDOTXkZApXyGmHEZHBEvePe7iiyol23kRiBAlT16eBEmAUVz8s\n2bBD5wreoTDkjU6o0VYbcbaZfvdx2zeFFYMeVme4zyIviIpWqZuIxhVe3hww1qs0\nT+EQFoC7iJOrj3RWUZ3r2quzK013F7LYaDD9eyulROrnQxYqfroPmdQP468VDXcV\naIo1RqRZHlrWb/aVt5UuRg61x0si51GFog2NjsL8ZOiwisRw8wLW9iwAz9dcrdl8\n1gklEArXvboW0YZv2ogqYBWuZy/VjSvncdJI/LkyolDgnlg0fjxDoHcAcz43xcDh\ntLp121GBAgMBAAECggEAE0n/qoR3z6AxQejzi9EANAZo1gg7juQR1yKz2syfkr6Q\npR9t4axop+0kEqHzCBl0Vrf4XYRuugCr2lkOWrl2Ns3+U4Dc4ah/M06j4CZN4mld\nyjEXzQKWmfyN7FOJxkrByeSiQ7ORC+W4+jCP4bdNnShgWjrQ11Hd2VPd/+f35QMN\nQZPYoto22rsTquJVt5MeK9hFiG0riEj8EusXAy++zBwxy70CWI/LZsNo7SQUXLXP\nt+DHEm8b0WbfPe0QyLUqWBgEsfkuD3tNNwabPFzbIKn3md+I0bHn3WiSVC0NquuX\nSpPzTvIfp3EH1bzHCbFgXdphV3bkFvY5jfamgmASyQKBgQD0FD3MEZQdvtCrVAod\n49J2mrLSaKvhHv+xtMnn5eNgPCl+Seas21N/E9I7PDMf90cL1zQQ9wc2bemaa/9h\nxs4klEKLeptbRJ3YNrd/3eHOQgN0N1LpElZpr3FLSgv07Yygrpq/o/BS7W6p+jtk\nEH95k1+ozGUW/iL0TO3/Q9U+OQKBgQDPoNk7RtG2w92R4iBoFNl7xHXSUNggAQb/\nJ2B0Xh613W01/TKeTAG4gSL5nK+fxWsl1qiZGE8GMxo17+fGomOQg3rqUovGqsgn\nTgOL1HVwbvpy8Fnzey68/Mq7RMvijqy0kQe0Z+f9efdAqeDlR2v5YpEa29YWWpIv\n0+HjIzUtiQKBgDWMQ0qECMTF2i3cUCPimYffxJ+Yyyymil5IVYuEye+RA2FrgSon\nLBhTFupb+LNoorOcURXvvCtazcdNLkgbP5qS1E6ZZYAOe7q1tmhdG28O2IckpBHy\nLfcdwHNOGXVwsEuIQvcMVms7H+42sdTwMadQh8oWnY7/zldekVBRZ3UxAoGBALPP\n9HHOmk5zAE+YC0K4U8VJVlSHKTVGTn3o5zLAVE5ibnNkTVMkNhVI2TZdiQeQXIQP\njEHR+JZA6YEuvIadGicMhwWp6V1riB3qBU4y+GYf5oxmNTCVTNvk/doC8aPKti1G\nsOp/Vj2CRCxfMuK94PfAcjRVkOoZFCORlz4zvpkpAoGBANROCxDWIwaRR0Vyg/KK\nfFGMEGyi7vhEu8oTOB3U5IQ/9ZwgFPDCXbrxWmWnAVH4OkpUWj+9d7Cx3BJOnJiE\n78k5gsDgOFrdSIgYgxui3LhjWlDggF3as/AaluU8J2VIhqiUNFu81oXpDP1DaL8Y\nyZx2xAs2WnYZ2aXq0/78Pflg\n-----END PRIVATE KEY-----\n",
+  "client_email": "cashflow-parser@precise-hangar-499608-k2.iam.gserviceaccount.com",
+  "client_id": "104124868537600385292",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cashflow-parser%40precise-hangar-499608-k2.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
