@@ -52,17 +52,15 @@ class GamesCategory(models.Model):
         return self.category_name
 
 
+
+
 class Games(models.Model):
     game_name = models.CharField(max_length=32, verbose_name='Название тренинга')
     game_sub_name = models.TextField('Подзаголовок для тренинга')
     game_desc = models.TextField('Описание тренинга')
     game_skills = models.TextField('Получаемые навыки')
+    game_time = models.TextField('Сколько идет игра? (от-до)', default='4')
     game_category = models.ForeignKey(GamesCategory, on_delete=models.CASCADE)
-    game_photo1 = models.ImageField(upload_to='media', default='', verbose_name='Фото тренинга')
-    game_photo2 = models.ImageField(upload_to='media', default='', verbose_name='Фото тренинга')
-    game_photo3 = models.ImageField(upload_to='media', default='', verbose_name='Фото тренинга')
-    game_photo4 = models.ImageField(upload_to='media', default='', verbose_name='Фото тренинга')
-    game_photo5 = models.ImageField(upload_to='media', default='', verbose_name='Фото тренинга')
     class Meta:
         verbose_name = 'Тренинг'
         verbose_name_plural = 'Тренинги'
@@ -71,6 +69,15 @@ class Games(models.Model):
         return self.game_name
 
 
+class Game_photo(models.Model):
+    game_text = models.TextField(default='Фото')
+    game_photo = models.ImageField(upload_to='media', verbose_name='Фото мероприятия')
+    game_card = models.ForeignKey(Games, on_delete=models.CASCADE)
+    class Meta:
+        verbose_name = 'Фото'
+        verbose_name_plural = 'Фотки'
 
+    def __str__(self):
+        return self.game_text
 
 

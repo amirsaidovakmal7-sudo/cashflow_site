@@ -14,7 +14,8 @@ def home_page(request):
     team = Team.objects.all()
     categories = GamesCategory.objects.all()
     game = Games.objects.all()
-    context = {'brands':brands, 'events':events, 'team':team, 'categories':categories, 'game':game}
+    game_photos = Game_photo.objects.all()
+    context = {'brands':brands, 'events':events, 'team':team, 'categories':categories, 'game':game, 'game_photos':game_photos}
     return render(request, 'home.html', context)
 
 

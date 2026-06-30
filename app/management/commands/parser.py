@@ -88,32 +88,14 @@ def check_orders():
     print('ОБЬЕКТ ПОМЕНЯЛСЯ')
 
 
-def delete_if_orders_full():
-    for e in event:
-        if e.event_amount == '9/9':
-            e.delete()
-            print('ОБЬЕКТ УДАЛИЛСЯ')
-    return True
 
 
-def delete_object_if_not_in_table():
-    sheet = gc.open_by_key(GOOGLE_KEY).worksheet('Слоты')
-    data = sheet.get_all_values()
-    for row in range(1, len(data)):
-        name = data[row][1]
-        date = data[row][2]
-        for e in event:
-            if e.event_name != name and e.event_date != date:
-                e.delete()
-    print('УДАЛИЛСЯ')
 
 
 def do_all_func():
     while True:
         create_event()
         check_orders()
-        delete_if_orders_full()
-        delete_object_if_not_in_table()
         time.sleep(300)
 
 

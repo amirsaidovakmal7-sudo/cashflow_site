@@ -329,6 +329,8 @@
             margin-top: 20px;
         }
         .games-cards-block { min-width: 0; }
+        .games-text-variant { display: none; }
+        .games-text-variant.active { display: block; }
         @media (max-width: 960px) {
             .games-content-grid { grid-template-columns: 1fr; gap: 32px; }
             .games-text-block { position: static; }
@@ -414,7 +416,7 @@
             display: flex !important; align-items: center !important;
             gap: 10px !important; text-decoration: none !important; flex-shrink: 0;
         }
-        .logo-hex { width: 44px !important; height: 44px !important; flex-shrink: 0; object-fit: contain; }
+        .logo-hex { width: 64px !important; height: 64px !important; flex-shrink: 0; object-fit: contain; }
         .logo-text {
             font-family: var(--font-brand) !important; font-size: 1.5rem !important;
             font-weight: 400 !important; color: var(--gold-light) !important;
@@ -499,7 +501,7 @@
 
         /* ===== HERO ===== */
         #hero {
-            min-height: 100vh; position: relative;
+            position: relative;
             display: flex; align-items: center; overflow: hidden;
         }
         .hero-bg {
@@ -520,7 +522,7 @@
         /* ИСПРАВЛЕНО: поднят контент героя выше, уменьшены отступы */
         .hero-inner {
             position: relative; z-index: 1; max-width: 1400px;
-            margin: 0 auto; padding: 100px 40px 60px; width: 100%;
+            margin: 0 auto; padding: 120px 40px 50px; width: 100%;
         }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 8px;
@@ -551,9 +553,10 @@
         .hero-desc { font-size: .88rem; color: var(--grey); max-width: 460px; margin-bottom: 32px; }
         .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
         .hero-stats {
-            display: flex; gap: 48px; margin-top: 48px; padding-top: 32px;
-            border-top: 1px solid rgba(255,255,255,.08); flex-wrap: wrap; justify-content: center;
+            display: flex; gap: 32px; margin-top: 32px; padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,.08); flex-wrap: wrap; justify-content: flex-start;
         }
+        .stat-item { text-align: center; }
         .stat-num {
             font-family: var(--font-display); font-size: 2.4rem;
             font-weight: 700; color: var(--gold-light); line-height: 1;
@@ -680,10 +683,14 @@
         /* карточка тренинга */
         .game-card {
             background: var(--dark2); border: 1px solid rgba(255,255,255,.06);
-            padding: 28px 22px; cursor: pointer;
+            padding: 22px 22px; cursor: pointer;
             transition: border-color .3s, transform .3s, box-shadow .3s;
             position: relative; overflow: hidden;
             flex-shrink: 0;
+        }
+        .game-header-row {
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 16px;
         }
         .game-card::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
@@ -695,11 +702,12 @@
         .game-icon-wrap {
             width: 48px; height: 48px; border: 1px solid rgba(201,151,28,.3);
             display: flex; align-items: center; justify-content: center;
-            margin-bottom: 18px; transition: background .3s;
+            flex-shrink: 0; transition: background .3s;
         }
         .game-card:hover .game-icon-wrap { background: rgba(201,151,28,.1); }
         .game-icon { font-size: 1.3rem; color: var(--gold); }
-        .game-name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 5px; }
+        .game-name { font-family: var(--font-body); font-size: 1.1rem; font-weight: 700; color: var(--gold-light); margin: 0; }
+        .game-name.game-name-kaushan { font-family: var(--font-brand); font-size: 1.3rem; font-weight: 400; color: var(--gold-light); }
         .game-sub { font-size: .78rem; color: var(--gold); letter-spacing: .5px; margin-bottom: 12px; }
         .game-desc { font-size: .82rem; color: var(--grey); line-height: 1.7; margin-bottom: 14px; }
         .game-skills { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -794,12 +802,27 @@
             background: none; border: none; color: var(--grey); font-size: 1.4rem; cursor: pointer; transition: color .2s;
         }
         .modal-close:hover { color: var(--gold-light); }
-        .modal-title { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+        .modal-title { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--gold-light); margin-bottom: 6px; }
+        .modal-title.modal-title-kaushan { font-family: var(--font-brand); font-weight: 400; font-size: 2.2rem; }
         .modal-subtitle { font-size: .9rem; color: var(--gold); margin-bottom: 20px; }
         .modal-body-text { font-size: .9rem; color: var(--grey-light); line-height: 1.8; margin-bottom: 24px; }
         .modal-section-title { font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; font-weight: 600; }
-        .modal-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-        .modal-skill-tag { font-size: .8rem; color: var(--gold-light); border: 1px solid rgba(201,151,28,.3); padding: 5px 12px; background: rgba(201,151,28,.06); }
+        .modal-skills {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 8px 32px; list-style: none !important; padding: 0 !important; margin: 0 !important;
+        }
+        .modal-skill-tag {
+            font-size: .85rem; color: var(--gold-light); padding: 0;
+            display: flex !important; align-items: flex-start; gap: 8px;
+            list-style: none !important;
+        }
+        .modal-skill-tag::before {
+            content: '•'; color: var(--gold); font-size: 1.1rem; line-height: 1;
+            flex-shrink: 0;
+        }
+        @media (max-width: 600px) {
+            .modal-skills { grid-template-columns: 1fr; }
+        }
         .modal-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
         .modal-meta-item { font-size: .85rem; color: var(--grey-light); display: flex; align-items: center; gap: 8px; }
         .modal-meta-item i { color: var(--gold); }
@@ -808,11 +831,17 @@
         .modal-layout {
             display: grid;
             grid-template-columns: 1fr 200px;
-            gap: 28px;
+            grid-template-rows: auto auto auto auto;
+            gap: 0 28px;
             align-items: start;
         }
-        .modal-left { min-width: 0; }
+        .modal-left { min-width: 0; display: contents; }
+        .modal-left-text { grid-column: 1; grid-row: 1; }
+        .modal-skills-wrap { grid-column: 1 / -1; grid-row: 2; margin: 24px 0; }
+        .modal-meta { grid-column: 1; grid-row: 3; }
+        .modal-cta-btn { grid-column: 1; grid-row: 4; margin-top: 24px; }
         .modal-gallery {
+            grid-column: 2; grid-row: 1;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -916,7 +945,15 @@
         .modal-layout.no-gallery { grid-template-columns: 1fr; }
 
         @media (max-width: 600px) {
-            .modal-layout { grid-template-columns: 1fr; }
+            .modal-layout {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "gallery"
+                    "text"
+                    "skills"
+                    "meta"
+                    "cta";
+            }
             .modal-gallery { flex-direction: row; flex-wrap: wrap; }
             .modal-gallery-main { width: 100%; height: 180px; }
             .modal-gallery-strip { flex: 1; }
@@ -1109,6 +1146,24 @@
         }
         .social-link:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
 
+        /* Карточки соцсетей в секции контактов */
+        .social-cards { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+        .social-card {
+            flex: 1; min-width: 140px;
+            background: var(--dark2); border: 1px solid rgba(201,151,28,.25);
+            padding: 24px 16px; text-align: center;
+            display: flex; flex-direction: column; align-items: center; gap: 14px;
+            transition: border-color .3s, transform .3s;
+        }
+        .social-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+        .social-card-label { font-size: .85rem; color: var(--grey-light); font-weight: 500; }
+        .social-card-btn {
+            width: 44px; height: 44px; background: var(--dark3); border: 1px solid rgba(201,151,28,.3);
+            display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.2rem;
+            transition: all .3s;
+        }
+        .social-card:hover .social-card-btn { background: var(--gold); color: var(--black); border-color: var(--gold); }
+
         /* ===== FOOTER ===== */
         footer { background: var(--black); border-top: 1px solid rgba(201,151,28,.1); padding: 32px 0; }
         .footer-inner {
@@ -1117,6 +1172,8 @@
         }
         .footer-copy { font-size: .8rem; color: var(--grey); }
         .footer-logo { font-family: var(--font-brand); font-size: 1.2rem; color: var(--gold-light); font-weight: 400; }
+        .footer-logo-wrap { display: flex; align-items: center; gap: 10px; }
+        .footer-logo-img { width: 36px; height: 36px; flex-shrink: 0; object-fit: contain; }
 
         /* Particles */
         .particle {
@@ -1293,10 +1350,6 @@
             </div>
         </div>
     </div>
-    <div class="hero-scroll">
-        <div class="scroll-line"></div>
-        <span>Scroll</span>
-    </div>
 </section>
 
 <!-- ===== ABOUT ===== -->
@@ -1341,7 +1394,7 @@
             <div class="about-text reveal-left">
                 <span class="section-eyebrow">О сообществе</span>
                 <span class="gold-line"></span>
-                <h2 class="section-title">Люди приходят за <span class="accent">игрой.</span> Остаются ради<br>сообщества.</h2>
+                <h2 class="section-title" style="font-size:clamp(1.6rem, 4vw, 2.8rem);">Люди приходят за <span class="accent">игрой.</span><br>Остаются ради сообщества.</h2>
                 <p class="section-desc" style="margin-top:20px;">
                     CashFlow Tashkent - пространство, где развитие сочетается с живым общением, новыми знакомствами, яркими эмоциями и возможностями для личного и профессионального роста.
                 </p>
@@ -1520,7 +1573,7 @@
             <span class="section-eyebrow">Наши форматы</span>
             <span class="gold-line center"></span>
             <h2 class="section-title">Инструменты <span class="accent">развития</span></h2>
-            <p class="section-desc" style="margin:16px auto 0;">Каждый формат — это возможность получить новый опыт, познакомиться с интересными людьми и развить навыки, которые помогают в жизни, работе и бизнесе</p>
+            <p class="section-desc" style="margin:16px auto 0;max-width:720px;">Каждый формат — это возможность получить новый опыт, познакомиться с интересными людьми и развить навыки, которые помогают в жизни, работе и бизнесе</p>
         </div>
 
         <!-- Кнопки категорий — генерируются из БД -->
@@ -1536,20 +1589,54 @@
         <!-- Grid: текст слева + карточки справа -->
         <div class="games-content-grid">
 
-            <!-- Текстовый блок слева -->
+            <!-- Текстовый блок слева — три варианта под категории -->
             <div class="games-text-block reveal-left">
-                <div class="big-quote">
-                    Каждая встреча —<br>это новый <span class="line-gold">опыт</span>
+
+                <div class="games-text-variant active" data-text-category="Для взрослых">
+                    <div class="big-quote">
+                        Каждая встреча —<br>это новый <span class="line-gold">опыт</span>
+                    </div>
+                    <p class="games-text-desc">
+                        Мы не просто проводим игры. Мы создаём среду, где люди принимают настоящие решения, учатся на практике и сразу видят результат.
+                    </p>
+                    <p class="games-text-desc">
+                        Каждый формат подобран так, чтобы дать участникам навыки, которые работают в реальной жизни — в бизнесе, переговорах и общении.
+                    </p>
+                    <div class="games-text-quote">
+                        «Лучшее обучение происходит тогда,<br>когда это интересно»
+                    </div>
                 </div>
-                <p class="games-text-desc">
-                    Мы не просто проводим игры. Мы создаём среду, где люди принимают настоящие решения, учатся на практике и сразу видят результат.
-                </p>
-                <p class="games-text-desc">
-                    Каждый формат подобран так, чтобы дать участникам навыки, которые работают в реальной жизни — в бизнесе, переговорах и общении.
-                </p>
-                <div class="games-text-quote">
-                    «Лучшее обучение происходит тогда, когда это интересно»
+
+                <div class="games-text-variant" data-text-category="Для детей">
+                    <div class="big-quote">
+                        Учиться играя —<br>это <span class="line-gold">естественно</span>
+                    </div>
+                    <p class="games-text-desc">
+                        Дети легче усваивают новое через игру. Мы создаём пространство, где финансовая грамотность и уверенность в себе формируются без скучных лекций.
+                    </p>
+                    <p class="games-text-desc">
+                        Каждое занятие развивает самостоятельность, умение договариваться и принимать решения — навыки, которые пригодятся ребёнку на всю жизнь.
+                    </p>
+                    <div class="games-text-quote">
+                        «Лучшие уроки запоминаются,<br>когда они похожи на игру»
+                    </div>
                 </div>
+
+                <div class="games-text-variant" data-text-category="Корпоративные мероприятия">
+                    <div class="big-quote">
+                        Сильная команда —<br>это <span class="line-gold">общий опыт</span>
+                    </div>
+                    <p class="games-text-desc">
+                        Мы помогаем командам узнать друг друга в нестандартной обстановке, где решения принимаются вместе, а доверие растёт через совместное действие.
+                    </p>
+                    <p class="games-text-desc">
+                        Игровой формат снимает напряжение, раскрывает лидерские качества сотрудников и укрепляет взаимодействие внутри коллектива.
+                    </p>
+                    <div class="games-text-quote">
+                        «Команда становится сильнее,<br>когда играет вместе»
+                    </div>
+                </div>
+
             </div>
 
             <!-- Карточки тренингов — слайдер -->
@@ -1565,16 +1652,14 @@
                  data-skills="{{ g.game_skills }}"
                  data-players="{{ g.game_players|default:'до 9 участников' }}"
                  data-time="{{ g.game_time|default:'4–5 часов' }}"
-                 data-game-images1="{% if g.game_photo1 %}{{ g.game_photo1.url }}{% endif %}"
-                 data-game-images2="{% if g.game_photo2 %}{{ g.game_photo2.url }}{% endif %}"
-                 data-game-images3="{% if g.game_photo3 %}{{ g.game_photo3.url }}{% endif %}"
-                 data-game-images4="{% if g.game_photo4 %}{{ g.game_photo4.url }}{% endif %}"
-                 data-game-images5="{% if g.game_photo5 %}{{ g.game_photo5.url }}{% endif %}"
+                 data-game-photos="{% for p in g.game_photo_set.all %}{{ p.game_photo.url }}{% if not forloop.last %},{% endif %}{% endfor %}"
                  onclick="openGameModal(this)">
-                <div class="game-icon-wrap">
-                    <i class="bi bi-controller game-icon"></i>
+                <div class="game-header-row">
+                    <div class="game-icon-wrap">
+                        <i class="bi bi-controller game-icon"></i>
+                    </div>
+                    <div class="game-name{% if 'cashflow' in g.game_name|lower or 'cash flow' in g.game_name|lower or 'кэшфлоу' in g.game_name|lower or 'кешфлоу' in g.game_name|lower %} game-name-kaushan{% endif %}">{{ g.game_name }}</div>
                 </div>
-                <div class="game-name">{{ g.game_name }}</div>
                 <div class="game-sub">{{ g.game_sub_name }}</div>
                 <p class="game-desc">{{ g.game_desc }}</p>
                 <div class="game-skills">
@@ -1582,7 +1667,7 @@
                 </div>
                 <div class="game-meta">
                     <div class="game-meta-item"><i class="bi bi-people"></i> {{ g.game_players|default:"до 9 чел" }}</div>
-                    <div class="game-meta-item"><i class="bi bi-clock"></i> {{ g.game_time|default:"4–6 ч" }}</div>
+                    <div class="game-meta-item"><i class="bi bi-clock"></i> {{ g.game_time }}</div>
                 </div>
                 <div class="game-cta-wrap">
                     <button class="btn-gold" style="font-size:11px;padding:10px 20px;" onclick="event.stopPropagation();openGameModal(this.closest('.game-card'))">Подробнее</button>
@@ -1679,13 +1764,17 @@
         <div class="modal-layout" id="modalLayout">
             <!-- Левая часть — текст -->
             <div class="modal-left">
-                <div class="modal-title" id="modalTitle">—</div>
-                <div class="modal-subtitle" id="modalSub">—</div>
-                <p class="modal-body-text" id="modalDesc">—</p>
-                <div class="modal-section-title">Навыки, которые развивает тренинг</div>
-                <div class="modal-skills" id="modalSkills"></div>
+                <div class="modal-left-text">
+                    <div class="modal-title" id="modalTitle">—</div>
+                    <div class="modal-subtitle" id="modalSub">—</div>
+                    <p class="modal-body-text" id="modalDesc">—</p>
+                </div>
+                <div class="modal-skills-wrap">
+                    <div class="modal-section-title">Навыки, которые развивает тренинг</div>
+                    <ul class="modal-skills" id="modalSkills"></ul>
+                </div>
                 <div class="modal-meta" id="modalMeta"></div>
-                <a href="https://t.me/CashFlowTashkent_bot" target="_blank" class="btn-gold">
+                <a href="https://t.me/CashFlowTashkent_bot" target="_blank" class="btn-gold modal-cta-btn">
                     <i class="bi bi-telegram"></i> Записаться
                 </a>
             </div>
@@ -1992,9 +2081,19 @@
                         <div class="contact-value">Ташкент, Узбекистан</div>
                     </div>
                 </div>
-                <div class="social-links">
-                    <a href="https://t.me/CashFlowTashkent_bot" target="_blank" class="social-link"><i class="bi bi-telegram"></i></a>
-                    <a href="https://instagram.com/cashflow.tashkent" target="_blank" class="social-link"><i class="bi bi-instagram"></i></a>
+                <div class="social-cards">
+                    <a href="https://t.me/CashFlowTashkent_bot" target="_blank" class="social-card">
+                        <span class="social-card-label">Telegram-бот</span>
+                        <span class="social-card-btn"><i class="bi bi-telegram"></i></span>
+                    </a>
+                    <a href="https://t.me/cashflow_tashkent" target="_blank" class="social-card">
+                        <span class="social-card-label">Telegram-группа</span>
+                        <span class="social-card-btn"><i class="bi bi-telegram"></i></span>
+                    </a>
+                    <a href="https://instagram.com/cashflow.tashkent" target="_blank" class="social-card">
+                        <span class="social-card-label">Instagram</span>
+                        <span class="social-card-btn"><i class="bi bi-instagram"></i></span>
+                    </a>
                 </div>
             </div>
             <div class="reveal-right">
@@ -2025,7 +2124,10 @@
 <!-- ===== FOOTER ===== -->
 <footer style="position:relative; overflow:hidden;">
     <div class="footer-inner">
-        <div class="footer-logo brand-name">CashFlow Tashkent</div>
+        <div class="footer-logo-wrap">
+            <img class="footer-logo-img" src="/static/medias/logocashflow.png" alt="" onerror="this.style.display='none'">
+            <div class="footer-logo brand-name">CashFlow Tashkent</div>
+        </div>
         <div class="footer-copy">© 2024 CashFlow Tashkent. Все права защищены.</div>
         <div style="display:flex;gap:12px;">
             <a href="https://t.me/CashFlowTashkent_bot" target="_blank" class="social-link" style="width:36px;height:36px;font-size:.9rem;"><i class="bi bi-telegram"></i></a>
@@ -2094,10 +2196,15 @@ for (let i = 0; i < 18; i++) {
 const catBtns = document.querySelectorAll('.cat-btn');
 const gameCards = document.querySelectorAll('#trainingsGrid .game-card');
 const teamOnlyBlocks = document.getElementById('teamOnlyBlocks');
+const textVariants = document.querySelectorAll('.games-text-variant');
 const TEAM_CAT = 'Корпоративные мероприятия';
 
 function filterCategory(catName) {
     const isAll = catName === 'all' || catName === 'Все тренинги';
+
+    textVariants.forEach(variant => {
+        variant.classList.toggle('active', variant.dataset.textCategory === catName);
+    });
 
     gameCards.forEach(card => {
         const cardCat = card.dataset.category || '';
@@ -2141,14 +2248,18 @@ let galleryCur = 0;
 
 function openGameModal(card) {
     const modal = document.getElementById('gameModal');
-    document.getElementById('modalTitle').textContent = card.dataset.title || '';
+    const modalTitleEl = document.getElementById('modalTitle');
+    modalTitleEl.textContent = card.dataset.title || '';
+    const cardNameEl = card.querySelector('.game-name');
+    const isKaushan = cardNameEl && cardNameEl.classList.contains('game-name-kaushan');
+    modalTitleEl.classList.toggle('modal-title-kaushan', !!isKaushan);
     document.getElementById('modalSub').textContent = card.dataset.sub || '';
     document.getElementById('modalDesc').textContent = card.dataset.desc || '';
 
     const skillsEl = document.getElementById('modalSkills');
     skillsEl.innerHTML = '';
     (card.dataset.skills || '').split(',').filter(Boolean).forEach(s => {
-        const tag = document.createElement('span');
+        const tag = document.createElement('li');
         tag.className = 'modal-skill-tag';
         tag.textContent = s.trim();
         skillsEl.appendChild(tag);
@@ -2159,14 +2270,11 @@ function openGameModal(card) {
         <div class="modal-meta-item"><i class="bi bi-clock-fill"></i> ${card.dataset.time || ''}</div>
     `;
 
-    // Собираем фотографии из data-атрибутов
-    galleryPhotos = [
-        card.dataset.gameImages1,
-        card.dataset.gameImages2,
-        card.dataset.gameImages3,
-        card.dataset.gameImages4,
-        card.dataset.gameImages5,
-    ].filter(src => src && src.trim() !== '' && src.trim() !== 'None' && src.trim() !== 'undefined' && src.trim() !== 'false');
+    // Собираем фотографии из data-game-photos (строка через запятую)
+    galleryPhotos = (card.dataset.gamePhotos || '')
+        .split(',')
+        .map(s => s.trim())
+        .filter(src => src && src !== '' && src !== 'None' && src !== 'undefined' && src !== 'false');
 
     galleryCur = 0;
 
