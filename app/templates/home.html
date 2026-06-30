@@ -523,6 +523,22 @@
         .hero-inner {
             position: relative; z-index: 1; max-width: 1400px;
             margin: 0 auto; padding: 120px 40px 50px; width: 100%;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+        }
+        .hero-text-col { min-width: 0; }
+        .hero-image-col {
+            position: relative; width: 100%;
+            justify-self: end;
+            margin-top: 60px;
+        }
+        .hero-image-col img {
+            width: 100%; height: auto; display: block;
+            border: 1px solid rgba(201,151,28,.2);
+        }
+        @media (max-width: 960px) {
+            .hero-inner { grid-template-columns: 1fr; }
+            .hero-image-col { justify-self: center; max-width: 480px; margin-top: 32px; order: 2; }
+            .hero-text-col { order: 1; }
         }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 8px;
@@ -1117,7 +1133,7 @@
             min-width: calc(25% - 15px); flex-shrink: 0;
         }
         .team-card:hover { border-color: rgba(201,151,28,.3); transform: translateY(-4px); }
-        .team-img-wrap { width: 100%; height: 200px; overflow: hidden; background: var(--dark3); position: relative; }
+        .team-img-wrap { width: 100%; aspect-ratio: 3 / 4; overflow: hidden; background: var(--dark3); position: relative; }
         .team-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; filter: grayscale(.4); }
         .team-card:hover .team-img-wrap img { transform: scale(1.05); filter: grayscale(0); }
         .team-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--gold-dim); }
@@ -1318,36 +1334,41 @@
     <div class="hero-grid"></div>
     <div class="hero-particles" id="heroParticles"></div>
     <div class="hero-inner">
-        <div class="hero-badge">Ташкент • С 2024 года</div>
-        <h1 class="hero-title reveal">
-            Сообщество, где <span class="gold-word">развитие, общение</span>
-            и новые возможности объединяются в увлекательный опыт
-        </h1>
-        <p class="hero-sub reveal" style="transition-delay:.15s">
-            Развиваем финансовое мышление, лидерство и коммуникацию через игровые практики и бизнес-симуляции.
-        </p>
-        <p class="hero-desc reveal" style="transition-delay:.25s">
-            Интересные люди, увлекательные практики, новые знакомства и навыки — для жизни, работы и бизнеса.
-        </p>
-        <div class="hero-cta reveal" style="transition-delay:.35s">
-            <a href="https://t.me/CashFlowTashkent_bot" target="_blank" class="btn-gold">
-                <i class="bi bi-telegram"></i> Записаться
-            </a>
-            <a href="#about" class="btn-outline-gold">Узнать больше</a>
+        <div class="hero-text-col">
+            <div class="hero-badge">Ташкент • С 2024 года</div>
+            <h1 class="hero-title reveal">
+                Сообщество, где <span class="gold-word">развитие, общение и новые возможности</span>
+                объединяются в увлекательный опыт
+            </h1>
+            <p class="hero-sub reveal" style="transition-delay:.15s">
+                Развиваем финансовое мышление, лидерство и коммуникацию через игровые практики и бизнес-симуляции.
+            </p>
+            <p class="hero-desc reveal" style="transition-delay:.25s">
+                Интересные люди, увлекательные практики, новые знакомства и навыки — для жизни, работы и бизнеса.
+            </p>
+            <div class="hero-cta reveal" style="transition-delay:.35s">
+                <a href="https://t.me/CashFlowTashkent_bot" target="_blank" class="btn-gold">
+                    <i class="bi bi-telegram"></i> Записаться
+                </a>
+                <a href="#about" class="btn-outline-gold">Узнать больше</a>
+            </div>
+            <div class="hero-stats reveal" style="transition-delay:.5s">
+                <div class="stat-item">
+                    <div class="stat-num" data-count="2000">0</div>
+                    <div class="stat-label">Участников</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num" data-count="7">0</div>
+                    <div class="stat-label">Видов тренингов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num" data-count="2024">0</div>
+                    <div class="stat-label">Год основания</div>
+                </div>
+            </div>
         </div>
-        <div class="hero-stats reveal" style="transition-delay:.5s">
-            <div class="stat-item">
-                <div class="stat-num" data-count="2000">0</div>
-                <div class="stat-label">Участников</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num" data-count="7">0</div>
-                <div class="stat-label">Видов тренингов</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num" data-count="2024">0</div>
-                <div class="stat-label">Год основания</div>
-            </div>
+        <div class="hero-image-col">
+            <img src="/static/medias/firstpage.png" alt="" onerror="this.style.display='none'">
         </div>
     </div>
 </section>
