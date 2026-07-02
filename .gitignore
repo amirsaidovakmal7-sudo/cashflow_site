@@ -7,10 +7,7 @@ db.sqlite3
 db.sqlite3-journal
 
 # ===== МЕДИА (загружено пользователями через админку) =====
-media/
 
-# ===== СТАТИКА (собирается командой collectstatic) =====
-staticfiles/
 
 # ===== PYTHON =====
 __pycache__/
