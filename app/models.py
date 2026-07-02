@@ -59,6 +59,7 @@ class Games(models.Model):
     game_sub_name = models.TextField('Подзаголовок для тренинга')
     game_desc = models.TextField('Описание тренинга')
     game_skills = models.TextField('Получаемые навыки')
+    game_players = models.TextField('Кол-во участников', default='до 9 чел')
     game_time = models.TextField('Сколько идет игра? (от-до)', default='4')
     game_category = models.ForeignKey(GamesCategory, on_delete=models.CASCADE)
     class Meta:

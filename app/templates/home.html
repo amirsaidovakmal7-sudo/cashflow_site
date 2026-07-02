@@ -322,10 +322,10 @@
         }
         .games-text-block .games-text-quote {
             font-family: var(--font-display);
-            font-size: 1.05rem;
+            font-size: 1.4rem;
             font-style: italic;
             color: var(--gold-light);
-            line-height: 1.6;
+            line-height: 1.5;
             margin-top: 20px;
         }
         .games-cards-block { min-width: 0; }
@@ -703,10 +703,12 @@
             transition: border-color .3s, transform .3s, box-shadow .3s;
             position: relative; overflow: hidden;
             flex-shrink: 0;
+            display: flex; flex-direction: column;
         }
         .game-header-row {
             display: flex; align-items: center; gap: 14px;
             margin-bottom: 16px;
+            min-height: 72px;
         }
         .game-card::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
@@ -724,8 +726,10 @@
         .game-icon { font-size: 1.3rem; color: var(--gold); }
         .game-name { font-family: var(--font-body); font-size: 1.1rem; font-weight: 700; color: var(--gold-light); margin: 0; }
         .game-name.game-name-kaushan { font-family: var(--font-brand); font-size: 1.3rem; font-weight: 400; color: var(--gold-light); }
-        .game-sub { font-size: .78rem; color: var(--gold); letter-spacing: .5px; margin-bottom: 12px; }
-        .game-desc { font-size: .82rem; color: var(--grey); line-height: 1.7; margin-bottom: 14px; }
+        .game-name.game-name-bold { font-weight: 900; }
+        .game-name .name-bold-part { font-weight: 900; }
+        .game-sub { font-size: .78rem; color: var(--gold); letter-spacing: .5px; margin-bottom: 12px; min-height: 36px; }
+        .game-desc { font-size: .82rem; color: var(--grey); line-height: 1.7; margin-bottom: 14px; min-height: 80px; }
         .game-skills { display: flex; flex-wrap: wrap; gap: 5px; }
         .game-skill-tag { font-size: .68rem; color: var(--grey); border: 1px solid rgba(255,255,255,.08); padding: 3px 7px; }
         .game-meta {
@@ -1097,7 +1101,7 @@
 
         /* ===== TEAM ===== */
         #team { background: var(--black); position: relative; overflow: hidden; }
-        .history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 80px; }
+        .history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 48px; }
         .history-title-text { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--white); margin-bottom: 24px; }
         .history-p { font-size: .9rem; color: var(--grey-light); line-height: 1.8; margin-bottom: 16px; }
         .mission-box {
@@ -1109,11 +1113,11 @@
         .mission-box-sub { font-size: .9rem; color: var(--white); font-style: italic; margin-bottom: 12px; }
         .mission-box-text { font-size: .85rem; color: var(--grey); line-height: 1.8; }
         .founder-wrap { position: relative; }
-        .founder-img-box { position: relative; overflow: hidden; }
+        .founder-img-box { position: relative; overflow: hidden; margin-top: 210px; }
         .founder-img-box img { width: 100%; object-fit: cover; display: block; filter: grayscale(.3) contrast(1.05); }
         .founder-img-box::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, var(--black) 100%); z-index: 1; }
         .founder-img-box::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100%; border: 1px solid rgba(201,151,28,.2); pointer-events: none; z-index: 2; }
-        .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+        .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
         .value-item { background: var(--dark2); border: 1px solid rgba(255,255,255,.06); padding: 20px; transition: border-color .3s; }
         .value-item:hover { border-color: rgba(201,151,28,.3); }
         .value-item-title { font-size: .8rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; font-weight: 600; }
@@ -1216,7 +1220,7 @@
             .head-inner { padding: 0 20px !important; }
             .event-card { min-width: calc(48% - 10px); }
             .team-card { min-width: calc(50% - 10px); }
-            .values-grid { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 640px) {
             section { padding: 64px 0; }
@@ -1337,7 +1341,7 @@
         <div class="hero-text-col">
             <div class="hero-badge">Ташкент • С 2024 года</div>
             <h1 class="hero-title reveal">
-                Сообщество, где <span class="gold-word">развитие, общение и новые возможности</span>
+                Сообщество, где <span class="gold-word">развитие, общение</span> и <span class="gold-word">новые возможности</span>
                 объединяются в увлекательный опыт
             </h1>
             <p class="hero-sub reveal" style="transition-delay:.15s">
@@ -1679,7 +1683,7 @@
                     <div class="game-icon-wrap">
                         <i class="bi bi-controller game-icon"></i>
                     </div>
-                    <div class="game-name{% if 'cashflow' in g.game_name|lower or 'cash flow' in g.game_name|lower or 'кэшфлоу' in g.game_name|lower or 'кешфлоу' in g.game_name|lower %} game-name-kaushan{% endif %}">{{ g.game_name }}</div>
+                    <div class="game-name{% if 'cashflow' in g.game_name|lower or 'cash flow' in g.game_name|lower or 'кэшфлоу' in g.game_name|lower or 'кешфлоу' in g.game_name|lower or 'flixa' in g.game_name|lower %} game-name-kaushan{% endif %}">{{ g.game_name }}</div>
                 </div>
                 <div class="game-sub">{{ g.game_sub_name }}</div>
                 <p class="game-desc">{{ g.game_desc }}</p>
@@ -1731,7 +1735,7 @@
                     <h3 class="corp-title">Инвестируйте<br>в команду</h3>
                     <p class="corp-desc">Уникальные игровые тренинги для корпоративного роста. Улучшаем финансовую грамотность сотрудников, развиваем деловое мышление и командную работу.</p>
                     <ul class="corp-products">
-                        <li>Cashflow 101 / 202</li>
+                        <li>Cashflow 101</li>
                         <li>Мафия</li>
                         <li>Бункер</li>
                     </ul>
@@ -1981,26 +1985,28 @@
             </div>
             <div class="founder-wrap reveal-right">
                 <div class="founder-img-box">
-                    <img src="/static/medias/founder.jpg" alt="Основатель CashFlow Tashkent">
+                    <img src="/static/medias/history.png" alt="Фотография Сообщества">
                 </div>
-                <div class="values-grid">
-                    <div class="value-item">
-                        <div class="value-item-title">Доверие</div>
-                        <p class="value-item-text">Строим доверие через прозрачность и честность</p>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-item-title">Развитие</div>
-                        <p class="value-item-text">Непрерывный рост через управление рисками</p>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-item-title">Уважение</div>
-                        <p class="value-item-text">Среда поддержки и обмена идеями</p>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-item-title">Партнёрство</div>
-                        <p class="value-item-text">Сотрудничество для общих целей</p>
-                    </div>
-                </div>
+            </div>
+        </div>
+
+        <!-- Блоки ценностей — 4 в ряд под историей -->
+        <div class="values-grid">
+            <div class="value-item">
+                <div class="value-item-title">Доверие</div>
+                <p class="value-item-text">Строим доверие через прозрачность и честность</p>
+            </div>
+            <div class="value-item">
+                <div class="value-item-title">Развитие</div>
+                <p class="value-item-text">Непрерывный рост через управление рисками</p>
+            </div>
+            <div class="value-item">
+                <div class="value-item-title">Уважение</div>
+                <p class="value-item-text">Среда поддержки и обмена идеями</p>
+            </div>
+            <div class="value-item">
+                <div class="value-item-title">Партнёрство</div>
+                <p class="value-item-text">Сотрудничество для общих целей</p>
             </div>
         </div>
 
