@@ -322,7 +322,7 @@
         }
         .games-text-block .games-text-quote {
             font-family: var(--font-display);
-            font-size: 1.4rem;
+            font-size: 21px;
             font-style: italic;
             color: var(--gold-light);
             line-height: 1.5;
@@ -726,8 +726,11 @@
         .game-icon { font-size: 1.3rem; color: var(--gold); }
         .game-name { font-family: var(--font-body); font-size: 1.1rem; font-weight: 700; color: var(--gold-light); margin: 0; }
         .game-name.game-name-kaushan { font-family: var(--font-brand); font-size: 1.3rem; font-weight: 400; color: var(--gold-light); }
-        .game-name.game-name-bold { font-weight: 900; }
-        .game-name .name-bold-part { font-weight: 900; }
+        .game-name.game-name-italic { font-style: italic; }
+        .game-name .name-regular { font-size: 0.95rem; font-weight: 600; font-style: italic; }
+        .game-name .name-bold-part { font-size: 1.2rem; font-weight: 900; font-style: italic; display: block; }
+        .game-name.game-name-financy { font-style: italic; }
+        .game-name.game-name-financy .fi-accent { font-size: 1.25rem; font-weight: 900; }
         .game-sub { font-size: .78rem; color: var(--gold); letter-spacing: .5px; margin-bottom: 12px; min-height: 36px; }
         .game-desc { font-size: .82rem; color: var(--grey); line-height: 1.7; margin-bottom: 14px; min-height: 80px; }
         .game-skills { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -1683,7 +1686,7 @@
                     <div class="game-icon-wrap">
                         <i class="bi bi-controller game-icon"></i>
                     </div>
-                    <div class="game-name{% if 'cashflow' in g.game_name|lower or 'cash flow' in g.game_name|lower or 'кэшфлоу' in g.game_name|lower or 'кешфлоу' in g.game_name|lower or 'flixa' in g.game_name|lower %} game-name-kaushan{% endif %}">{{ g.game_name }}</div>
+                    <div class="game-name{% if 'cashflow' in g.game_name|lower or 'cash flow' in g.game_name|lower or 'кэшфлоу' in g.game_name|lower or 'кешфлоу' in g.game_name|lower or 'flixa' in g.game_name|lower %} game-name-kaushan{% elif 'финансы' in g.game_name|lower %} game-name-financy{% else %} game-name-italic{% endif %}">{% if 'денежный' in g.game_name|lower %}<span class="name-regular">Бизнес-тренажер</span><span class="name-bold-part">Денежный поток</span>{% elif 'финансы' in g.game_name|lower %}<span class="fi-accent">ФиИ</span> <span>{{ g.game_name }}</span>{% else %}{{ g.game_name }}{% endif %}</div>
                 </div>
                 <div class="game-sub">{{ g.game_sub_name }}</div>
                 <p class="game-desc">{{ g.game_desc }}</p>
