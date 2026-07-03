@@ -273,12 +273,6 @@
             width: 280px;
             height: 280px;
         }
-        @media (max-width: 640px) {
-            .hero-corner-tr, .hero-corner-bl,
-            .last-corner-bl, .last-corner-tr {
-                width: 140px; height: 140px;
-            }
-        }
         .hero-corner-tr { top: 0; right: 0; }
         .hero-corner-bl { bottom: 0; left: 0; }
         /* Последний блок */
@@ -1074,6 +1068,13 @@
             font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;
             color: var(--white); margin-bottom: 20px; line-height: 1.3;
         }
+        .event-name.event-name-kaushan {
+            font-family: var(--font-brand); font-size: 1.4rem; font-weight: 400;
+            color: var(--gold-light);
+        }
+        .event-name.event-name-italic {
+            font-style: italic; color: var(--gold-light);
+        }
         .event-info-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;
         }
@@ -1272,6 +1273,15 @@
             .value-list { grid-template-columns: 1fr; }
             .event-card { min-width: calc(100% - 0px); }
             .team-card { min-width: calc(100% - 0px); }
+        }
+        @media (max-width: 640px) {
+            .hero-corner-tr, .hero-corner-bl,
+            .last-corner-bl, .last-corner-tr {
+                width: 140px; height: 140px;
+            }
+            /* Навигация на мобильном */
+            .lang-switcher { display: none !important; }
+            .burger { display: flex !important; }
         }
         @media (prefers-reduced-motion: reduce) {
             * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
