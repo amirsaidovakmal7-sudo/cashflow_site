@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-93uwg0m%p6z+4#t+-idqw78sqk3c2x+qcr04gc7h$x5q_481*i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cashflowtashkent.uz', 'www.cashflowtashkent.uz']
+
 
 
 # Application definition
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'location_field',
+    'django.contrib.sitemaps',
 
 ]
 

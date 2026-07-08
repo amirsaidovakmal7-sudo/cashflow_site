@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /order
+
+Sitemap: https://cashflowtashkent.uz/sitemap.xml
+ 
