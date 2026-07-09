@@ -74,18 +74,10 @@ def create_event():
     return True
 
 
-def check_orders():
-    sheet = gc.open_by_key(GOOGLE_KEY).worksheet('Слоты')
-    data = sheet.get_all_values()
-    for row in range(1, len(data)):
-        name = data[row][1]
-        date = data[row][2]
-        orders = data[row][4]
-        for e in event:
-            if e.event_name == name and e.event_date == date and e.event_amount != orders:
-                e.event_amount = orders
-                e.save()
-    print('ОБЬЕКТ ПОМЕНЯЛСЯ')
+def delete_and_change_orders():
+    for e in event:
+        e.delete()
+    print('ОБЬЕКТ УДАЛИЛСЯ')
 
 
 
@@ -94,8 +86,8 @@ def check_orders():
 
 def do_all_func():
     while True:
+        delete_and_change_orders()
         create_event()
-        check_orders()
         time.sleep(300)
 
 
