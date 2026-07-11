@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ===== PRIMARY SEO ===== -->
-    <title>Игровые тренинги по финансовому мышлению | Ташкент</title>
+    <title>CashFlow Tashkent — Игровые тренинги по финансовому мышлению | Ташкент</title>
     <meta name="description" content="CashFlow Tashkent — сообщество, где развивают финансовое мышление, лидерство и коммуникацию через игровые тренинги. Cashflow 101/202, бизнес-симуляции, корпоративные тренинги в Ташкенте. Записаться: @CashFlowTashkent_bot">
     <meta name="keywords" content="cashflow tashkent, кэшфлоу ташкент, игровые тренинги ташкент, финансовое мышление, бизнес тренинги ташкент, кэшфлоу игра, денежный поток тренинг, финансовая грамотность, тимбилдинг ташкент, корпоративные тренинги, cashflow 101, cashflow 202, инвестиции игра, мафия тимбилдинг, бизнес симуляция, лидерство переговоры, нетворкинг ташкент, финансовое образование узбекистан, кийосаки игра ташкент, cashflow game tashkent, business training tashkent">
     <meta name="author" content="CashFlow Tashkent">
@@ -37,8 +37,8 @@
     <meta name="twitter:image" content="https://cashflowtashkent.uz/static/media/og-image.jpg">
 
     <!-- ===== FAVICON ===== -->
-    <link rel="icon" type="image/jpg" href="/static/medias/logosmall.jpg">
-    <link rel="shortcut icon" type="image/jpg" href="/static/medias/logosmall.jpg">
+    <link rel="icon" type="image/png" href="/static/medias/logocashflow.png">
+    <link rel="shortcut icon" type="image/png" href="/static/medias/logocashflow.png">
     <link rel="apple-touch-icon" href="/static/medias/logocashflow.png">
     <meta name="theme-color" content="#C9971C">
     <meta name="msapplication-TileColor" content="#0A0A0A">
@@ -701,6 +701,7 @@
         .trainings-grid {
             display: flex; gap: 16px;
             transition: transform .5s cubic-bezier(.4,0,.2,1);
+            touch-action: pan-y;
         }
         .trainings-nav {
             display: flex; justify-content: center; gap: 12px;
@@ -2549,18 +2550,52 @@ createSlider('teamTrack', 'teamPrev', 'teamNext', 'teamDots', () => {
         dotsEl.querySelectorAll('.ev-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
     }
 
-    document.getElementById('trainPrev').addEventListener('click', () => {
+    function goPrev() {
         const vis = getVis();
         const max = Math.max(0, getVisible().length - vis);
         cur = cur <= 0 ? max : cur - 1;
         update();
-    });
-    document.getElementById('trainNext').addEventListener('click', () => {
+    }
+    function goNext() {
         const vis = getVis();
         const max = Math.max(0, getVisible().length - vis);
         cur = cur >= max ? 0 : cur + 1;
         update();
-    });
+    }
+
+    document.getElementById('trainPrev').addEventListener('click', goPrev);
+    document.getElementById('trainNext').addEventListener('click', goNext);
+
+    // Свайп для телефонов
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchMoved = false;
+
+    track.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchMoved = false;
+    }, { passive: true });
+
+    track.addEventListener('touchmove', () => {
+        touchMoved = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+        if (!touchMoved) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        const swipeThreshold = 40;
+
+        // Игнорируем, если движение больше вертикальное, чем горизонтальное (скролл страницы)
+        if (Math.abs(dx) < swipeThreshold || Math.abs(dx) < Math.abs(dy)) return;
+
+        if (dx < 0) {
+            goNext();
+        } else {
+            goPrev();
+        }
+    }, { passive: true });
 
     window.addEventListener('resize', () => { cur = 0; build(); }, { passive: true });
 

@@ -81,9 +81,6 @@ def delete_and_change_orders():
 
 
 
-
-
-
 def do_all_func():
     while True:
         delete_and_change_orders()
@@ -91,11 +88,3 @@ def do_all_func():
         time.sleep(300)
 
 
-thread = threading.Thread(target=do_all_func)
-thread.daemon = True
-thread.start()
-
-# Основной поток продолжает свою работу
-print("Основной поток продолжает выполняться...")
-while True:
-    time.sleep(1)
