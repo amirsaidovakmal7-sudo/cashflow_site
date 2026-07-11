@@ -81,10 +81,10 @@ def delete_and_change_orders():
 
 
 
-def do_all_func():
-    while True:
-        delete_and_change_orders()
-        create_event()
-        time.sleep(300)
+
+while True:
+    delete_and_change_orders()
+    create_event()
+    time.sleep(300)
 
 
