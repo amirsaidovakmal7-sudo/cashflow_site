@@ -1053,7 +1053,7 @@
         /* ===== EVENTS ===== */
         #events { background: var(--dark); position: relative; overflow: hidden; }
         .events-slider-wrap { position: relative; overflow: hidden; margin-top: 60px; }
-        .events-track { display: flex; gap: 20px; transition: transform .5s cubic-bezier(.4,0,.2,1); }
+        .events-track { display: flex; gap: 20px; transition: transform .5s cubic-bezier(.4,0,.2,1); touch-action: pan-y; }
         /* ИСПРАВЛЕНО: карточки событий стали уже — 3 на экране с меньшим размером */
         .event-card {
             background: var(--dark3); border: 1px solid rgba(255,255,255,.07);
@@ -1166,7 +1166,7 @@
 
         /* ИСПРАВЛЕНО: команда как галерея */
         .team-slider-wrap { position: relative; overflow: hidden; }
-        .team-track { display: flex; gap: 20px; transition: transform .5s cubic-bezier(.4,0,.2,1); }
+        .team-track { display: flex; gap: 20px; transition: transform .5s cubic-bezier(.4,0,.2,1); touch-action: pan-y; }
         /* ИСПРАВЛЕНО: карточки команды уже */
         .team-card {
             background: var(--dark2); border: 1px solid rgba(255,255,255,.06);
@@ -2469,16 +2469,50 @@ function createSlider(trackId, prevId, nextId, dotsId, getVisCount) {
 
     function go(i) { cur = i; update(); }
 
-    document.getElementById(prevId).addEventListener('click', () => {
+    function goPrev() {
         const max = Math.max(0, track.children.length - getVis());
         cur = cur <= 0 ? max : cur - 1;
         update();
-    });
-    document.getElementById(nextId).addEventListener('click', () => {
+    }
+    function goNext() {
         const max = Math.max(0, track.children.length - getVis());
         cur = cur >= max ? 0 : cur + 1;
         update();
-    });
+    }
+
+    document.getElementById(prevId).addEventListener('click', goPrev);
+    document.getElementById(nextId).addEventListener('click', goNext);
+
+    // Свайп для телефонов
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchMoved = false;
+
+    track.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchMoved = false;
+    }, { passive: true });
+
+    track.addEventListener('touchmove', () => {
+        touchMoved = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+        if (!touchMoved) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        const swipeThreshold = 40;
+
+        // Игнорируем, если движение больше вертикальное, чем горизонтальное (скролл страницы)
+        if (Math.abs(dx) < swipeThreshold || Math.abs(dx) < Math.abs(dy)) return;
+
+        if (dx < 0) {
+            goNext();
+        } else {
+            goPrev();
+        }
+    }, { passive: true });
 
     window.addEventListener('resize', () => { build(); }, { passive: true });
     build();
