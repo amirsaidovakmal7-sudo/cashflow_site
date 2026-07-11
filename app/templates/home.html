@@ -697,7 +697,7 @@
         }
 
         /* Слайдер карточек тренингов */
-        .trainings-slider-wrap { position: relative; overflow: hidden; }
+        .trainings-slider-wrap { position: relative; overflow: hidden; touch-action: pan-y; }
         .trainings-grid {
             display: flex; gap: 16px;
             transition: transform .5s cubic-bezier(.4,0,.2,1);
@@ -1052,7 +1052,7 @@
 
         /* ===== EVENTS ===== */
         #events { background: var(--dark); position: relative; overflow: hidden; }
-        .events-slider-wrap { position: relative; overflow: hidden; margin-top: 60px; }
+        .events-slider-wrap { position: relative; overflow: hidden; margin-top: 60px; touch-action: pan-y; }
         .events-track { display: flex; gap: 20px; transition: transform .5s cubic-bezier(.4,0,.2,1); touch-action: pan-y; }
         /* ИСПРАВЛЕНО: карточки событий стали уже — 3 на экране с меньшим размером */
         .event-card {
@@ -1165,7 +1165,7 @@
         .team-section-sub { font-size: .9rem; color: var(--grey); margin-bottom: 40px; }
 
         /* ИСПРАВЛЕНО: команда как галерея */
-        .team-slider-wrap { position: relative; overflow: hidden; }
+        .team-slider-wrap { position: relative; overflow: hidden; touch-action: pan-y; }
         .team-track { display: flex; gap: 20px; transition: transform .5s cubic-bezier(.4,0,.2,1); touch-action: pan-y; }
         /* ИСПРАВЛЕНО: карточки команды уже */
         .team-card {
@@ -2483,23 +2483,22 @@ function createSlider(trackId, prevId, nextId, dotsId, getVisCount) {
     document.getElementById(prevId).addEventListener('click', goPrev);
     document.getElementById(nextId).addEventListener('click', goNext);
 
-    // Свайп для телефонов
+    // Свайп для телефонов (слушаем на неподвижной обёртке, а не на самом треке,
+    // чтобы после сдвига translateX свайп продолжал работать)
+    const wrap = track.parentElement;
     let touchStartX = 0;
     let touchStartY = 0;
-    let touchMoved = false;
+    let touchActive = false;
 
-    track.addEventListener('touchstart', (e) => {
+    wrap.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
-        touchMoved = false;
+        touchActive = true;
     }, { passive: true });
 
-    track.addEventListener('touchmove', () => {
-        touchMoved = true;
-    }, { passive: true });
-
-    track.addEventListener('touchend', (e) => {
-        if (!touchMoved) return;
+    wrap.addEventListener('touchend', (e) => {
+        if (!touchActive) return;
+        touchActive = false;
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
         const swipeThreshold = 40;
@@ -2513,6 +2512,8 @@ function createSlider(trackId, prevId, nextId, dotsId, getVisCount) {
             goPrev();
         }
     }, { passive: true });
+
+    wrap.addEventListener('touchcancel', () => { touchActive = false; }, { passive: true });
 
     window.addEventListener('resize', () => { build(); }, { passive: true });
     build();
@@ -2600,23 +2601,22 @@ createSlider('teamTrack', 'teamPrev', 'teamNext', 'teamDots', () => {
     document.getElementById('trainPrev').addEventListener('click', goPrev);
     document.getElementById('trainNext').addEventListener('click', goNext);
 
-    // Свайп для телефонов
+    // Свайп для телефонов (слушаем на неподвижной обёртке, а не на самом треке,
+    // чтобы после сдвига translateX свайп продолжал работать)
+    const wrap = track.parentElement;
     let touchStartX = 0;
     let touchStartY = 0;
-    let touchMoved = false;
+    let touchActive = false;
 
-    track.addEventListener('touchstart', (e) => {
+    wrap.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
-        touchMoved = false;
+        touchActive = true;
     }, { passive: true });
 
-    track.addEventListener('touchmove', () => {
-        touchMoved = true;
-    }, { passive: true });
-
-    track.addEventListener('touchend', (e) => {
-        if (!touchMoved) return;
+    wrap.addEventListener('touchend', (e) => {
+        if (!touchActive) return;
+        touchActive = false;
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
         const swipeThreshold = 40;
@@ -2630,6 +2630,8 @@ createSlider('teamTrack', 'teamPrev', 'teamNext', 'teamDots', () => {
             goPrev();
         }
     }, { passive: true });
+
+    wrap.addEventListener('touchcancel', () => { touchActive = false; }, { passive: true });
 
     window.addEventListener('resize', () => { cur = 0; build(); }, { passive: true });
 
