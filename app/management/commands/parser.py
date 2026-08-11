@@ -82,9 +82,4 @@ def delete_and_change_orders():
 
 
 
-while True:
-    delete_and_change_orders()
-    create_event()
-    time.sleep(300)
-
 
