@@ -80,16 +80,11 @@ def delete_and_change_orders():
     print('ОБЬЕКТ УДАЛИЛСЯ')
 
 
-class Command(BaseCommand):
-    help = 'Синхронизация мероприятий с Google Sheets'
 
-    def handle(self, *args, **options):
-        self.stdout.write('Парсер запущен...')
-        while True:
-            try:
-                delete_and_change_orders()
-                create_event()
-            except Exception as e:
-                self.stderr.write(f'Ошибка: {e}')
-            time.sleep(300)
-
+while True:
+    try:
+        delete_and_change_orders()
+        create_event()
+    except Exception as e:
+        print(f'Ошибка: {e}')
+    time.sleep(300)
