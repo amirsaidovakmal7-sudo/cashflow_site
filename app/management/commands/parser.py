@@ -37,7 +37,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 
 gc = gspread.authorize(credentials)
 
-event = Event.objects.all()
+
 
 
 def create_event():
@@ -75,6 +75,7 @@ def create_event():
 
 
 def delete_and_change_orders():
+    event = Event.objects.all()
     for e in event:
         e.delete()
     print('ОБЬЕКТ УДАЛИЛСЯ')
